@@ -10,6 +10,9 @@
 \usepackage{amsthm}
 \usepackage{amsmath}
 
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
 \geometry{
  a4paper,
  left=25mm,
@@ -278,9 +281,8 @@ $S$의 벡터가 $V$를 생성한다고 하기도 함.
 
 \subsubsection*{4) 일차종속/일차독립이 가지는 의미}
 일차독립\\
-= 영벡터를 자명한 표현으로만 나타낼 수 있음.\\
-= 해당 집합의 모든 벡터(영벡터 포함) 각각을 일차결합으로 표현하는 방법이 유일함.\\ 
-= 해당 집합의 모든 벡터가 0이 아닌 스칼라와 다른 벡터의 일차결합으로 표현되지 않음.\\
+= 영벡터를 자명한 표현으로만 나타낼 수 있음.\\ 
+= 해당 집합의 모든 벡터가 다른 벡터들의 일차결합으로 표현되지 않음.\\
 
 
 \newpage
@@ -383,6 +385,8 @@ $\beta$가 $n$개의 벡터로 이루어진 $V$의 기저이고, $\gamma$가 또
 (2) 일차독립이고 $n$개의 벡터로 이루어진 $V$의 부분집합은 $V$의 기저임.\\
 (3) 집합 $L \subset V$가 일차독립이면 $L \subseteq \beta$인 기저 $\beta$가 존재함. 즉, 일차독립인 $V$의 부분집합을 확장시켜 기저를 만들 수 있음.
 
+3번 정리를 Basis Extension Theorem이라고 함. 일차독립인 집합으로 원하는 기저를 생성할 수 있다는 의미.
+
 정리하면, 유한차원 벡터공간 $V$에서 $dim(V)=n$이라 할 때, 일차독립인 부분집합은 벡터의 개수가 $n$보다 클 수 없고, $V$를 생성하는 부분집합은 $n$보다 작을 수 없음. 기저는 일차독립인 집합의 집합과 생성집합의 집합의 교집합으로, 그 크기가 $n$임.
 
 
@@ -445,7 +449,11 @@ T(\sum_{i=1}^{n}{a_i x_i})=\sum_{i=1}^{n}{a_i T(x_i)}
 
 영변환 $T_0 : V \rightarrow W$는 모든 $x \in V$에 대해서 $T_0(x)=0$이라 정의되는 선형임.
 
-\subsubsection*{4) 선형의 예시}
+\subsubsection*{4) 선형연산자(linear operator)}
+정의역과 공역이 같은 선형변환.\\
+다시 말해, 벡터공간 $V$에서 자기 자신으로 가는 선형변환.
+
+\subsubsection*{5) 선형의 예시}
 대표적인 선형 기하 변환으로는 회전, 대칭, 사영(한 값을 0으로 만드는 것)이 있음.
 
 행렬을 전치행렬로 변환하는 함수, 미분, 적분 등 또한 선형임.\\
@@ -518,6 +526,8 @@ $span(T(\beta)) \subseteq R(T)$이고 $R(T) \subseteq span(T(\beta))$이므로 $
 nullity(T)+rank(T)=dim(V)
 \]
 
+선형변환 $T$에 대해서, $V$의 기저 중 일부는 0으로 가고 나머지는 상공간으로 간다는 의미.
+
 \begin{proof}
 차원정리의 증명은 4가지 단계로 이루어짐.
 
@@ -550,12 +560,14 @@ $N(T)=\{0\}$인 경우, $T(x)=T(y)$라고 가정하자. $T(x)-T(y)=0$, $T(x-y)=0
 \textbf{Theorem 2.5}\, 유한차원 벡터공간 $V,W$의 차원이 같을 때, 선형변환 $T:\,V \rightarrow W$에 대해서 아래의 세 명제는 동치임.
 
 \begin{enumerate}
-    \item $T$는 단사(one-to-one)임.
-    \item $T$는 전사(onto)임.
+    \item $T$는 단사(one-to-one, injection)임.
+    \item $T$는 전사(onto, surjection)임.
     \item $rank(T)=dim(V)$
 \end{enumerate}
 
 즉, 두 벡터공간의 차원이 같을 때 세 가지 명제 중 하나만 밝히면 나머지도 밝혀짐.
+
+추가로, 이는 곧 해당 선형변환이 가역임을 의미함.
 
 \begin{proof}
 $T$가 단사임 $\Leftrightarrow$ $N(T)=\{0\}$ $\Leftrightarrow$ $nullity(T)=0$ $\Leftrightarrow$ $rank(T)=dim(V)=dim(W)$ $\Leftrightarrow$ $dim(R(T))=dim(W)$
@@ -574,11 +586,35 @@ $R(T)$는 $W$의 부분공간이므로 정리 1.11에 의해 차원이 같으면
 $i=1,2, \cdots ,n$에 대하여 $T(v_i)=w_i$
 \end{center}
 
-즉, 기저의 원소만 보내 봐도 선형변환을 확정지을 수 있음. 기저에서 보낸 함숫값들의 조합은 선형변환에 따라 여러 가지가 있을 수 있는데, 각 조합에 대해서 선형변환이 유일하게 존재한다는 것. 정의역의 모든 값들을 보낼 필요 없이 기저에서 보내는 것만으로 선형변환을 확정할 수 있음.
+즉, 정의역의 모든 값들을 보낼 필요 없이 기저의 원소만 보내 봐도 선형변환을 확정지을 수 있음. 기저에서 보낸 함숫값들의 조합은 선형변환에 따라 여러 가지가 있을 수 있는데, 각 조합에 대해서 선형변환이 유일하게 존재한다는 것.
 
 선형변환을 정의하는 기본적인 방법.
 
 선형변환의 행렬표현에서 기저만으로 선형변환을 정의하는 것은 linear extension theorem이 그래도 된다는 것을 보장하기 때문임.
+
+아래의 다이어그램은 벡터공간 $V,W$와 선형변환 $T:V \rightarrow W$에 대해서, linear extension theorem에서 기저가 어떻게 이동하는지를 보여줌.
+
+\begin{tikzpicture}
+%Nodes
+\node[]     (V)                     {V};
+\node[]     (W)     [right=of V]    {W};
+\node[]     (N)     [below=of V]    {N(T)};
+\node[]     (R)     [below=of W]    {R(T)};
+\node[]     (v0)    [below=of N]    {0};
+\node[]     (w0)    [below=of R]    {0};
+
+%Lines
+\draw[-]    (V.south) -- (N.north);
+\draw[-]    (W.south) -- (R.north);
+\draw[->]   (V.east) -- (R.north west)
+    node[midway, sloped, above]{T};
+\draw[-]    (N.south) -- (v0.north);
+\draw[-]    (R.south) -- (w0.north);
+\draw[->]   (N.east) -- (w0.north west)
+    node[midway, sloped, above]{T};
+\draw[->]   (v0.east) -- (w0.west)
+    node[midway, above]{T};
+\end{tikzpicture}
 
 \begin{proof}
 $x \in V$는 $a_1,a_2, \cdots ,a_n \in F$에 대해서 $x=\sum_{i=1}^{n}{a_{i}v_{i}}$로 유일하게 표현할 수 있음.
@@ -616,6 +652,7 @@ $cT(v)+T(u)=T(cv+u)$가 성립함.
 \subsubsection*{2) 표준 순서기저(standard ordered basis)}
 벡터공간 $F^n$의 표준 순서기저는 $\{e_1,e_2, \cdots ,e_n\}$임.\\
 $P_n(F)$의 표준 순서기저는 $\{1,x, \cdots ,x_n\}$임.\\
+$R^n$의 표준 순서기저는 $\{{(1,0, \cdots), \cdots ,(\cdots ,0,1,0, \cdots), \cdots ,(\cdots ,0,1)}\}$
 
 
 \section*{2. 좌표벡터(coordinate vector)}
@@ -634,7 +671,7 @@ a_{n}
 \]
 
 순서기저를 사용해 벡터를 $n$순서쌍으로 나타낸 것.\\
-
+벡터를 좌표벡터로 표현하면 여러 계산에서 일종의 행렬로서 다룰 수 있게 됨.\\
 
 \newpage
 
@@ -680,6 +717,9 @@ $I_{v_j}=v_j=0v_1+0v_2+ \cdots +1v_j+ \cdots +0v_n$이므로 $I_V$의 $j$열은 
 즉, 항등변환의 행렬표현은 $n \times n$ 항등행렬임.\\
 
 
+\newpage
+
+
 \section*{4. 선형변환의 집합 $\mathcal{L}(V,W)$\footnote{새로운 집합과 함수가 등장했으므로, 지금까지 배운 내용을 생각해 보면 $\mathcal{L}(V,W)$가 벡터공간인지, $U(T)=[T]_{\beta}^{\gamma}$가 선형변환인지는 당연히 생각해봐야 하는 주제임.}}
 
 \subsubsection*{1) 정의}
@@ -687,13 +727,22 @@ $F$-벡터공간 $V,W$에 대하여 $V$에서 $W$로 가는 모든 선형변환�
 
 Theorem 2.7에 의하면 $\mathcal{L}(V,W)$는 $F$-벡터공간임.
 
-\subsubsection*{2) $U(T)=[T]_{\beta}^{\gamma}$는 선형변환인가?}
+\subsubsection*{2) $[\cdot]_{\beta}^{\gamma}$는 선형변환인가?}
 선형변환을 행렬표현으로 나타낼 수 있으므로, $T \in \mathcal{L}(V,W)$에 대해서 $U(T)=[T]_{\beta}^{\gamma}$인 $U:\mathcal{L}(V,W) \rightarrow M_{dim(W) \times dim(V)}(F)$라는 함수를 생각할 수 있음.
 
 Theorem 2.8에 의하면 $U(T)=[T]_{\beta}^{\gamma}$는 선형변환임.
 
+\subsubsection*{3) $\mathcal{L}(V,W)$의 기저}
+$\mathcal{L}(V,W)$의 기저는 아래와 같음. (증명은 여종헌 프린트 참고.)
 
-\newpage
+$$
+T_{ij}(v_k)=\begin{cases}
+    w_i\quad(k=j)\\
+    0\,\,\quad(k \neq j)
+\end{cases}
+$$
+
+
 
 
 \section*{5. 관련 정리}
@@ -708,6 +757,8 @@ Theorem 2.8에 의하면 $U(T)=[T]_{\beta}^{\gamma}$는 선형변환임.
     \item 임의의 $a \in F$에 대하여, $aT+U$는 선형임.
     \item 위 정의와 같이 선형변환의 합과 스칼라 곱을 정의할 때, $V$에서 $W$로 가는 모든 선형변환의 집합은 $F$-벡터공간임.
 \end{enumerate}
+
+선형변환의 집합($\mathcal{L}$)은 함수의 집합($\mathcal{F}$)의 부분공간임.
 
 \begin{proof}
 미리 정의한 함수의 합과 곱을 사용해 $(aT+U)(cx+y)=c(aT+U)(x)+(aT+U)(y)$임을 보이면 됨.
@@ -755,6 +806,8 @@ $m \times n$ 행렬 $A$와 $n \times p$ 행렬 $B$에 대하여 두 행렬 $A,B$
 
 이 행렬 곱은 두 선형변환의 합성을 행렬로서 나타낸 연산임.
 
+추가로, 곱셈의 소거법칙은 성립하지 않음.
+
 \subsubsection*{2) 유도과정}
 유한차원 벡터공간 $V,W,Z$와 선형변환 $T:V \rightarrow W$, $U:W \rightarrow Z$가 있음. $V$의 순서기저 $\{v_1, \cdots , v_n\}$, $W$의 순서기저 $\{w_1, \cdots , w_m\}$, $Z$의 순서기저 $\{z_1, \cdots , z_p\}$에 대하여 $A=[U]^{\gamma}_{\beta}$, $B=[T]^{\beta}_{\alpha}$라 하자.
 
@@ -772,10 +825,55 @@ $AB=[UT]^{\gamma}_{\alpha}$가 되도록 하는 행렬 곱을 정의할 것임. 
 \subsubsection*{3) 행렬 곱과 행렬의 크기\footnote{이는 기저의 개수를 생각하면 당연함.}}
 행렬 곱을 하는 두 행렬의 내부 차원이 같아야 행렬 곱이 정의됨.
 
-행렬 곱을 하는 두 행렬의 외부 차원은 결과로 만들어지는 행렬의 크기를 결정함.\\
+행렬 곱을 하는 두 행렬의 외부 차원은 결과로 만들어지는 행렬의 크기를 결정함.
+
+\subsubsection*{4) 연속적인 행렬 곱의 표현}
+$n \times n$ 행렬 $A$에 대해서, $A^1=A,A^2=AA,A^3=A^2A, \cdots$로 정의함.
+즉, 2 이상의 자연수 $k$에 대해서, $A^k=A^{k-1}A$라 정의함. 이때, $A^0=I_n$임.
 
 
-\section*{3. 관련 정리}
+\newpage
+
+
+\section*{3. 선형변환의 합성과 행렬 곱 사이의 관계}
+\subsubsection*{1) 대응관계}
+행렬 곱의 유도과정과 Theorem 2.9에서 확인할 수 있듯이, 선형변환의 합성과 행렬 곱은 서로 완전히 대응됨.
+
+\subsubsection*{2) 동일한 성질}
+Theorem 2.10, 2.12, 2.16 등에서 확인할 수 있듯이, 선형변환의 합성과 행렬 곱은 아래의 성질들을 공유함.
+
+\begin{enumerate}
+    \item 분배법칙 성립.
+    \item 결합법칙 성립.
+    \item 항등원 성립. (항등변환, 항등행렬)
+    \item 스칼라 곱의 분배법칙 성립.
+    \item 교환법칙 성립하지 않음.\footnote{즉, $TU \neq UT$, $AB \neq BA$임}\\
+\end{enumerate}
+
+
+\section*{4. 좌측 곱 변환}
+
+행렬로 선형변환의 성질을, 또는 선형변환으로 행렬의 성질을 유추할 때 가장 유용하게 사용할 수 있는 도구.
+
+\subsubsection*{1) 정의}
+$A$는 $m \times n$ 행렬이고, 성분은 체 $F$의 원소임. 아래의 선형변환을 간단히 $L_A$라 표기하자.
+
+\[
+L_A:F^n \rightarrow F^m,\, L_A(x)=Ax
+\]
+
+$L_A$를 좌측 곱 변환이라 함. 이때 $x$는 $F^n$의 열벡터이고, $Ax$는 $A$와 $x$의 행렬 곱임.
+
+\subsubsection*{2) 성질}
+Theorem 2.15에서 알 수 있듯이, 좌측 곱 변환은 선형이고 해당 Theorem에 서술한 여러 성질들을 가짐.
+
+이 성질들을 이용해 행렬의 결합법칙을 증명할 수 있음.
+
+
+\newpage
+
+
+\section*{4. 관련 정리}
 
 \subsubsection*{1) 선형변환의 합성은 선형변환인가?}
 \textbf{Theorem 2.9}\, $F$-벡터공간 $V,W,Z$와 선형변환 $T:V \rightarrow W$, $U:W \rightarrow Z$를 생각하자. 두 선형변환의 합성 $UT:V \rightarrow Z$는 선형변환임.
@@ -784,11 +882,406 @@ $AB=[UT]^{\gamma}_{\alpha}$가 되도록 하는 행렬 곱을 정의할 것임. 
 \textbf{Theorem 2.10}\, 벡터공간 $V$와 선형변환 $T,U_1,U_2 \in \mathcal{L}(V)$에 대해서 아래가 성립함.
 
 \begin{enumerate}
-    \item $T(U_1+U_2)=TU_1+TU_2$이고, $(U_1+U_2)T=U_1T+U_2T$ (분배법칙 성립)
-    \item $T(U_1U_2)=(TU_1)U_2$
+    \item $T(U_1+U_2)=TU_1+TU_2$이고, $(U_1+U_2)T=U_1T+U_2T$ (분배법칙)
+    \item $T(U_1U_2)=(TU_1)U_2$ (결합법칙\footnote{함수의 합성에서 결합법칙이 성립하는 것은 책의 부록에서 확인할 수 있음.})
     \item $TI=IT=T$
     \item 모든 스칼라 $a$에 대해서 $a(U_1U_2)=(aU_1)U_2=U_1(aU_2)$
 \end{enumerate}
+
+\subsubsection*{3) 선형변환의 합성과 행렬 곱}
+\textbf{Theorem 2.11}\, 유한차원 벡터공간 $V,W,Z$와 각각의 순서기저 $\alpha,\beta,\gamma$, 선형변환 $T:V \rightarrow W$, $U:W \rightarrow Z$에 대해서 아래가 성립함.
+
+\[
+[UT]_{\alpha}^{\gamma}=[U]_{\beta}^{\gamma}[T]_{\alpha}^{\beta}
+\]
+
+행렬 곱의 유도과정과 정의를 생각하면 당연함.
+
+\subsubsection*{4) 행렬 곱의 성질}
+\textbf{Theorem 2.12}\, $A$가 $m \times n$ 행렬, $B$와 $C$가 $n \times p$ 행렬, $D$와 $E$가 $q \times m$ 행렬일 때, 다음이 성립함.
+
+\begin{enumerate}
+    \item $A(B+C)=AB+AC,\,(D+E)A=DA+EA$ (분배법칙)
+    \item 임의의 스칼라 $a$에 대하여 $a(AB)=(aA)B=A(aB)$
+    \item $I_{m}A=A=AI_{n}$
+\end{enumerate}
+
+이 성질은 각각 Theorem 2.10의 1, 4, 3과 대응됨.
+
+\subsubsection*{5) 특정 열벡터 구하는 방법}
+\textbf{Theorem 2.13}\, $m \times n$ 행렬 $A$와 $n \times p$ 행렬 $B$가 있음. $j=1,2, \cdots ,p$인 $j$에 대해서 $AB$의 $j$열을 $u_j$, $B$의 $j$열을 $v_j$라 표기하면 아래가 성립함.
+
+\begin{enumerate}
+    \item $u_j=Av_j$
+    \item $v_j=Be_j$ (이때, $e_j$는 $F^p$의 $j$번째 표준 벡터\footnote{j번째만 1이고 나머지는 0인 tuple.})
+\end{enumerate}
+
+즉, AB의 특정 열벡터를 구하려면 A에다가 B의 (구하려는 순번의) 열벡터를 곱하면 됨.
+
+B의 특정 열벡터를 구하려면 B 뒤에 $e_j$를 곱하면 됨.
+
+
+\newpage
+
+
+\subsubsection*{6) 좌표벡터의 행렬 곱}
+\textbf{Theorem 2.14}\, $V,W$는 유한차원 벡터공간이고, 순서기저는 각각 $\beta, \gamma$임. 선형변환 $T:V \rightarrow W$와 $u \in V$에 대해서 아래가 성립함.
+
+\[
+[T(u)]_{\gamma}=[T]_{\beta}^{\gamma}[u]_{\beta}
+\]
+
+즉, 선형변환에 벡터를 대입하고 행렬로 표현하나, 선형변환의 행렬표현에 해당 벡터의 좌표벡터를 곱하나 동일함.
+
+좌표벡터의 행렬 곱은 해당 선형변환에 대입하는 것과 같음.
+
+\begin{proof}
+$u \in V$를 고정하고 아래와 같은 선형변환 $f:F \rightarrow V,g:F \rightarrow W$를 정의하자.
+
+\begin{center}
+모든 $a \in F$에 대해서 $f(a)=au$, $g(a)=aT(u)$
+\end{center}
+
+$\alpha={1}$을 $F$의 표준 순서기저라 하자. $g =Tf$이므로 아래가 성립함.
+
+\[
+[T(u)]_{\gamma}=[g(1)]_{\gamma}=[g]_{\alpha}^{\gamma}=[Tf]_{\alpha}^{\gamma}=[T]_{\beta}^{\gamma}[f]_{\alpha}^{\beta}=[T]_{\beta}^{\gamma}[f(1)]_{\beta}=[T]_{\beta}^{\gamma}[u]_{\beta}
+\]
+
+\end{proof}
+
+\subsubsection*{7) 좌측 곱 변환의 성질}
+\textbf{Theorem 2.15}\, $A$는 $m \times n$ 행렬이고, 성분은 체 $F$의 원소임. 좌측 곱 변환 $L_A:F^n \rightarrow F^m$은 선형임.
+
+또한 임의의 $m \times n$ 행렬 $B$(성분은 체 $F$의 원소)와 $F^n$의 표준 순서기저 $\beta$, $F^m$의 표준 순서기저 $\gamma$에 대해서 아래가 성립함.
+
+\begin{enumerate}
+    \item $[L_A]_{\beta}^{\gamma}=A$
+    \item $L_A=L_B \Longleftrightarrow A=B$
+    \item $L_{A+B}=L_A+L_B$
+    \item 모든 $a \in F$에 대하여 $L_{aA}=aL_A$
+    \item $T:F^n \rightarrow F^m$가 선형이면 $T=L_C$가 되도록 하는 $m \times n$ 행렬 $C$가 유일하게 존재함. $C=[T]_{\beta}^{\gamma}$임.
+    \item $L_{AE}=L_{A}L_{E}$ ($E$는 $n \times p$ 행렬)
+    \item $m=n$이면 $L_{I_n}=I_{F^n}$임.
+\end{enumerate}
+
+\begin{proof}
+    (1) $[L_A]_{\beta}^{\gamma}$의 $j$열은 $L_A(e_j)$와 같음. $L_A(e_j)=Ae_j$는 $A$의 $j$열이므로 $[L_A]_{\beta}^{\gamma}=A$임.
+    
+    (2) $A=[L_A]_{\beta}^{\gamma}=[L_B]_{\beta}^{\gamma}=B$
+    
+    (5) 모든 $x \in F^n$에 대해서 $T(x)=Cx=L_C(x)$이므로 $T=L_C$임. 2번 성질에 의해 $C$는 유일함.
+\end{proof}
+
+\subsubsection*{8) 행렬 곱의 결합법칙}
+\textbf{Theorem 2.16}\, 행렬 곱에서 결합법칙이 성립함. 즉, $A(BC)$를 정의할 수 있는 행렬 $A,B,C$는 $(AB)C$도 정의할 수 있고 $A(BC)=(AB)C$임.
+
+이는 Theorem 2.10의 2와 대응됨. (선형변환의 합성의 결합법칙 성립과 대응됨.)
+
+\begin{proof}
+$L_{A(BC)}=L_{A}L_{BC}=L_{A}(L_{B}L_{C})=(L_{A}L_{B})L_{C}=L_{AB}L_{C}=L_{(AB)C}$
+
+Theorem 2.15의 2번 성질에 의해 $A(BC)=(AB)C$임.
+\end{proof}
+
+
+\newpage
+
+
+\part*{4. 가역성과 동형사상}
+
+\section*{1. 함수의 역함수(inverse)와 가역(invertible)}
+
+\subsubsection*{1) 정의}
+벡터공간 $V,W$와 선형변환 $T:V \rightarrow W$를 생각하자. $TU=I_W$이고 $UT=I_V$인 함수 $U$를 $T$의 역함수(inverse)라 함. 이 역함수는 $T^{-1}$로 표기함.
+
+역함수가 존재하는지를 가역(invertible)이라 함.
+
+\subsubsection*{2) 성질}
+함수가 가역이기 위한 필요충분조건은 해당 함수가 단사(injection)이고 전사(subjection)인 것임.
+
+$T$가 가역이면 $T$의 역함수는 유일함.
+
+$T^{-1}$은 가역임.
+
+$(TU)^{-1}=U^{-1}T^{-1}$
+
+$(T^{-1})^{-1}=T$임.
+
+\subsubsection*{3) 역함수(inverse)의 선형성}
+Theorem 2.17에 의하면 선형변환의 역함수 또한 선형변환임.\\
+
+
+\section*{2. 행렬의 역행렬(inverse)과 가역(invertible)}
+\subsubsection*{1) 정의}
+$n \times n$ 행렬 $A$에 대해서 $AB=BA=I$인 $n \times n$ 행렬 $B$를 $A$의 역행렬(inverse)이라고 함. 이 역행렬은 $A^{-1}$로 표기함.
+
+역행렬이 존재하는지를 가역(invertible)이라고 함.
+
+정의에서 알 수 있듯이, 정사각행렬(정방행렬)이 아니면 가역일 수 없음.
+
+\subsubsection*{2) 성질}
+$A$가 가역이면 $A$의 역행렬은 유일함.
+
+\subsubsection*{3) 구하는 방법}
+
+행렬의 역행렬을 구하는 방법은 3절에서 다룸.
+
+
+\newpage
+
+
+\section*{3. 동형(isomorphic)과 동형사상(isomorphism)}
+구체적으로는 다르지만 구조적으로는 같은 것을 동형(isomorphic)이라 함.
+
+\subsubsection*{1) 정의}
+두 벡터공간 $V,W$ 사이에 가역인 선형변환 $T:V \rightarrow W$가 존재하면 $V$와 $W$는 동형(isomorphic)임. 이때 가역인 선형변환을 $V$에서 $W$로 가는 동형사상(isomorphism)이라 함.
+
+무엇이 무엇과 동형이라는 개념은 동치관계임. 즉, $V$는 $V$와 동형이고, $V$가 $W$와 동형이면 $W$가 $V$와 동형이고, $V$가 $W$와 동형이고 $W$가 $S$와 동형이면 $V$가 $S$와 동형임.\\
+간단히 정리하면 '그저 $V$와 $W$는 동형'인 것.
+
+\subsubsection*{2) 동형이기 위한 필요충분조건}
+Theorem 2.19에 의하면, 같은 체 위의 두 벡터공간의 차원이 같다면 두 벡터공간은 동형임.
+
+즉, 차원이 같음 = 동형임 = 가역인 선형변환이 존재함.
+
+\subsubsection*{3) 동형사상과 '이름 바꾸기'}
+동형사상은 구조적으로 동일한 두 벡터공간을 이어준다는 점에서 벡터공간의 '이름만 바꾸는' 기능을 한다고 이해할 수 있음.
+
+일례로, 선형변환의 행렬표현이 가능했던 것 또한 사실 선형변환의 집합과 행렬의 집합이 동형이고, $[]_{\beta}^{\gamma}$가 '선형변환의 이름을 행렬로 바꾸는' 동형사상이기 때문임.\\
+
+아래의 그림은 벡터공간 $V,W$에 대해 동형사상(isomorphism) $T:V \rightarrow W$이 어떤 식으로 '이름을 바꾸는지'를 나타낸 다이어그램임. $V$의 연산을 $W$의 연산으로 바꾸고 있음.
+
+\begin{tikzpicture}
+%Nodes
+\node[]     (V1)                    {V};
+\node[]     (V2)    [right=of V1]   {V};
+\node[]     (W1)    [below=of V1]   {W};
+\node[]     (W2)    [below=of V2]   {W};
+
+%Lines
+\draw[->]   (V1.east) -- (V2.west)
+    node[midway, above]{$+ \times$};
+\draw[->]   (W1.east) -- (W2.west)
+    node[midway, above]{$+^{\prime} \times^{\prime}$};
+\draw[->]   (V1.south) -- (W1.north)
+    node[midway, left]{T};
+\draw[->]   (V2.south) -- (W2.north)
+    node[midway, right]{T};
+\end{tikzpicture}
+
+
+\section*{4. 표준표현(standard representation)}
+\subsubsection*{1) 정의}
+체 $F$에서의 $n$차원 벡터공간 $V$의 순서기저를 $\beta$라 하자. $\beta$에 대한 $V$의 표준표현(standard representation)은 아래와 같이 정의된 함수 $\phi_{\beta}:V \rightarrow F^n$임.
+
+\[
+x \in V,\,\phi_{\beta}(x)=[x]_{\beta}
+\]
+
+즉, 벡터를 좌표벡터로 나타내는 함수.
+
+\subsubsection*{2) 선형성과 동형성}
+$\phi_{\beta}$는 선형변환임.
+
+Theorem 2.21에 의하면 $\phi_{\beta}$는 벡터공간 $V$와 그 순서기저 $\beta$에 대해서 동형사상임.\\
+이는 곧 $n$차원 벡터공간과 $F^n$이 동형이라는 것을 의미함.
+
+
+\newpage
+
+
+\subsubsection*{3) 선형변환 합성의 가환적 그래프}
+차원이 각각 $n,m$인 벡터공간 $V,W$와 각각의 순서기저 $\beta, \gamma$, 선형변환 $T:V \rightarrow W$가 있다고 하자. $\phi_{\beta}$를 이용하면 $V$와 $F^n$을 동일시할 수 있고, $\phi_{\gamma}$를 이용하면 $W$와 $F^m$을 동일시할 수 있음. 즉, $T$와 $L_{[T]_{\beta}^{\gamma}}$또한 동일시할 수 있음. 이를 아래와 같이 수식으로 나타낼 수 있음.
+
+\[
+L_{[T]_{\beta}^{\gamma}}\phi_{\beta}=\phi_{\gamma}T
+\]
+
+이것을 이용하면 임의의 두 벡터공간 사이에 정의된 연산을 $F^n$과 $F^m$ 사이에 정의된 연산으로 나타낼 수 있음.
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=5cm, height=5cm]{2.4.png}\\
+\end{figure}
+
+\section*{5. 관련 정리}
+\subsubsection*{1) 역함수의 선형성}
+\textbf{Theorem 2.17}\, 벡터공간 $V,W$와 가역인 선형변환 $T:V \rightarrow W$에 대해서 역함수 $T^{-1}:V \rightarrow W$ 또한 선형임.
+
+\textbf{Corollary}\, 선형변환 $T:V \rightarrow W$가 가역이라고 하자. $V$가 유한차원이기 위한 필요충분조건은 $W$가 유한차원인 것임. 특히 이때 $dim(V)=dim(W)$임.
+
+즉, 가역인 선형변환이 존재하면 두 벡터공간 모두가 유한차원이거나 무한차원이고, 유한차원인 경우 두 벡터공간의 차원도 같음.
+
+\subsubsection*{2) 선형변환의 역함수와 행렬의 역행렬의 관계}
+\textbf{Theorem 2.18}\, 유한차원 벡터공간 $V,W$와 각각의 순서기저 $\beta,\gamma$, 선형변환 $T:V \rightarrow W$에 대해서 $T$가 가역이기 위한 필요충분조건은 $[T]^{\gamma}_{\beta}$가 가역인 것임. 특히, $[T^{-1}]_{\gamma}^{\beta}=([T]_{\beta}^{\gamma})^{-1}$임.
+
+이를 도식으로(항상 나오는 사각형의 그림.) 생각해 보면 이해가 편함.
+
+\textbf{Corollary}\, $n \times n$ 행렬 $A$가 가역이기 위한 필요충분조건은 $L_A$가 가역인 것임. 특히, $(L_A)^{-1}=L_{A^{-1}}$임.
+
+\subsubsection*{3) 동형이기 위한 필요충분조건}
+\textbf{Theorem 2.19}\, 같은 체 위에서 정의된 유한차원 벡터공간 $V,W$에 대해서 $V$와 $W$가 동형이기 위한 필요충분조건은 $dim(V)=dim(W)$임.
+
+\begin{proof}
+1. $V,W$가 동형임. $\cdots$ $dim(V)=dim(W)$
+$V,W$는 가역인 선형변환이 존재하고 유한차원이므로, Theorem 2.17의 Corollary에 의해 $dim(V)=dim(W)$임.
+
+2. $dim(V)=dim(W)$ $\cdots$ $V,W$가 동형임.
+$dim(V)=dim(W)=n$, $V$의 기저를 $\alpha=\{v_1, \cdots ,v_n\}$, $W$의 기저를 $\beta=\{w_1, \cdots ,w_n\}$라 하자. linear extension theorem에 의하면 $T(v_i)=w_i\,(1 \leq i \leq n)$인 선형변환 $T:V \rightarrow W$가 존재함. $R(T)=span(T(\alpha))=span(\beta)=W$이므로 $T$는 전사(onto, subjection)임. Theorem 2.5에 의해 $T$는 단사이므로 동형사상임.
+\end{proof}
+
+
+\newpage
+
+
+\subsubsection*{4) $\Phi^{\gamma}_{\beta}$의 동형성}
+\textbf{Theorem 2.20}\, 차원이 각각 $n,m$인 $F$-벡터공간 $V,W$를 생각하자. $V,W$의 순서기저를 각각 $\beta,\gamma$라 할 때, 아래와 같이 정의한 함수 $\Phi^{\gamma}_{\beta}:\mathcal{L}(V,W) \rightarrow M_{m \times n}(F)$는 동형사상임.
+
+\[
+T \in \mathcal{L}(V,W),\,\Phi^{\gamma}_{\beta}=[T]^{\gamma}_{\beta}
+\]
+
+즉, 선형변환의 집합과 행렬의 집합은 동형이고, 선형변환의 행렬표현을 나타내는 $[]_{\beta}^{\gamma}$는 동형사상임.\\
+이를 Fundamental Theorem of Linear Algebra라고 함. (선형사상=행렬)
+
+\begin{proof}
+동형사상은 가역인 선형변환임. Theorem 2.8에 의하면 $\Phi^{\gamma}_{\beta}$는 선형이므로 전단사인 것을 보여야 함. 임의의 $m \times n$ 행렬 $A$에 대해서 $\Phi^{\gamma}_{\beta}(T)=A$인 선형변환 $T:V \rightarrow W$가 유일하게 존재함을 보이면 됨.
+
+$\beta=\{v_1, \cdots ,c_n\}$, $\gamma=\{w_1, \cdots ,w_m\}$이라 하면, linear extension theorem에 의해 아래와 같이 정의된 선형변환 $T:V \rightarrow W$가 유일함.
+
+\[
+T(v_j)=\sum_{i=1}^{m}A_{ij}w_i\,(1 \leq j \leq n)
+\]
+
+즉, 행렬 $A$에 대해 선형변환 $T$가 유일함.
+
++ 여종헌 프린트에 $\mathcal{L}(V,W)$의 차원을 직접 구해 증명하는 방법도 나와있음.
+\end{proof}
+
+\textbf{Corollary}\, 차원이 각각 $n,m$인 유한차원 벡터공간 $V,W$에 대해서 $\mathcal{L}(V,W)$는 차원이 $nm$인 벡터공간임.
+
+\subsubsection*{5) $\phi_{\beta}$의 동형성}
+\textbf{Theorem 2.21}\, 임의의 유한차원 벡터공간 $V$와 순서기저 $\beta$에 대해서 $\phi_{\beta}$는 동형사상임.
+
+
+\newpage
+
+\part*{5. 좌표변환 행렬}
+
+\section*{1. 좌표변환 행렬(change of coordinate matrix)}
+
+\subsubsection*{1) 정의}
+Theorem 2.22에 의하면, 유한차원 벡터공간 $V$의 두 순서기저 $\beta, \beta^{\prime}$에 대해서, $Q=[I_V]^{\beta}_{\beta^{\prime}}$라 하자. 아래가 성립함.
+
+\begin{enumerate}
+    \item $Q$는 가역행렬임.
+    \item 임의의 $v \in V$에 대해서 $[v]_{\beta}=Q[v]_{\beta^{\prime}}$
+\end{enumerate}
+
+즉, 좌표변환 행렬은 벡터공간의 어떤 벡터에 대해서, 특정 기저로 표현한 좌표벡터를 다른 기저로 표현한 좌표벡터로 만들 수 있는 것.
+
+$Q$는 $\beta^{\prime}$좌표를 $\beta$좌표로 변환한다고 함.
+
+이때, $Q^{-1}$은 $\beta$좌표를 $\beta^{\prime}$좌표로 변환함.\\
+
+
+\section*{2. 선형변환 행렬표현의 전환}
+\subsubsection*{1) 선형변환 행렬표현의 전환}
+Theorem 2.23에 의하면, 한 선형변환의 행렬표현을 다른 기저를 이용한 동일한 선형변환의 행렬표현으로 전환할 수 있음. 아래가 그 식임.
+
+\begin{center}
+$[T]_{\beta^{\prime}}=[I_V]_{\beta}^{\beta^\prime}[T]^{\beta}_{\beta}[I_V]_{\beta^{\prime}}^{\beta}=Q^{-1}[T]_{\beta}Q$
+\end{center}
+
+\begin{center}
+$[T]_{\alpha}^{\beta}=[I_W]_{\beta^\prime}^{\beta}[T]_{\alpha^{\prime}}^{\beta^{\prime}}[I_V]_{\alpha}^{\alpha^{\prime}}$\\
+\end{center}
+
+\section*{3. 닮음(similar)\footnote{닮음에 대한 자세한 이야기는 5~7장에서 다룸.}}
+\subsubsection*{1) 정의}
+$A,B$가 $M_{n \times n}(F)$의 행렬이라 하자. $B=Q^{-1}AQ$인 가역행렬 $Q$가 존재하면 $B$는 $A$와 서로 닮음(similar)임.
+
+즉, 동일한 선형변환에 대해 서로 다른 두 행렬표현은 서로 닮은(similar)임.
+
+닮음 관계는 동치관계임.
+
+
+
+
+\newpage
+
+
+\section*{4. 관련 정리}
+\subsubsection*{1) 좌표변환 행렬(change of coordinate matrix)의 정의}
+\textbf{Theorem 2.22}\, 유한차원 벡터공간 $V$의 두 순서기저 $\beta, \beta^{\prime}$에 대해서, $Q=[I_V]^{\beta}_{\beta^{\prime}}$라 하자. 아래가 성립함.
+
+\begin{enumerate}
+    \item $Q$는 가역행렬임.
+    \item 임의의 $v \in V$에 대해서 $[v]_{\beta}=Q[v]_{\beta^{\prime}}$
+\end{enumerate}
+
+$Q$는 $\beta^{\prime}$좌표를 $\beta$좌표로 변환한다고 함.
+
+\begin{proof}
+1. $Q=[I_V]^{\beta}_{\beta^{\prime}}$인데, $I_V$가 가역이므로, $Q$ 또한 가역임.
+
+2. $[v]_{\beta}=[I_V(v)]_{\beta}=[I_V]_{\beta^{\prime}}^{\beta}[v]_{\beta^{\prime}}=Q[v]_{\beta^{\prime}}$
+\end{proof}
+
+\subsubsection*{2) 선형변환 행렬표현의 전환}
+\textbf{Theorem 2.23}\, 유한차원 벡터공간 $V$의 선형연산자 $T$와 $V$의 순서기저 $\beta$, $\beta^{\prime}$이 있음. $Q$가 $\beta^{\prime}$좌표를 $\beta$좌표로 옮기는 좌표변환 행렬이라 하면 아래가 성립함.
+
+\[
+[T]_{\beta^{\prime}}=[I_V]_{\beta}^{\beta^\prime}[T]^{\beta}_{\beta}[I_V]_{\beta^{\prime}}^{\beta}=Q^{-1}[T]_{\beta}Q
+\]
+
+즉, $T$가 유한차원 벡터공간 $V$의 선형연산자이고 $\beta$와 $\beta^{\prime}$이 $V$의 순서기저일 때, $[T]_{\beta^{\prime}}$과 $[T]_{\beta}$는 서로 닮음(similar)임.
+
+이를 더 일반화하여 $V,W$ 사이에 정의된 선형변환 $T:V \rightarrow W$에 대해 나타내면 아래와 같음.
+
+\[
+[T]_{\alpha}^{\beta}=[I_W]_{\beta^\prime}^{\beta}[T]_{\alpha^{\prime}}^{\beta^{\prime}}[I_V]_{\alpha}^{\alpha^{\prime}}
+\]
+
+\begin{proof}
+방법1. 선형변환 행렬표현의 전환을 함수의 합성으로 나타내기.
+
+벡터공간 $V$의 기저 $\alpha, \alpha^{\prime}$와 $W$의 기저 $\beta, \beta^{\prime}$에 대해서, 벡터의 이동을 고려하면 아래의 다이어그램을 생각할 수 있음. 즉, $[T]_{\alpha}^{\beta}=[I_W]_{\beta^\prime}^{\beta}[T]_{\alpha^{\prime}}^{\beta^{\prime}}[I_V]_{\alpha}^{\alpha^{\prime}}$임. $W$ 대신 $V$를 넣으면 위 식을 유도할 수 있음.
+
+\begin{tikzpicture}[scale=10]
+%Nodes
+\node[]     (V1)                    {V $\alpha$};
+\node[]     (V2)    [below=of V1]   {V $\alpha^{\prime}$};
+\node[]     (W1)    [right=of V1]   {W $\beta$};
+\node[]     (W2)    [below=of W1]   {W $\beta^{\prime}$};
+
+%Lines
+\draw[->]   (V1.south) -- (V2.north)
+    node[midway, left]{$[I_V]_{\alpha}^{\alpha^{\prime}}$};
+
+\draw[->]   (W2.north) -- (W1.south)
+    node[midway, right]{$[I_W]_{\beta^{\prime}}^{\beta}$};
+
+\draw[->]   (V1.east) -- (W1.west)
+    node[midway, above]{$[T]_{\alpha}^{\beta}$};
+    
+\draw[->]   (V2.east) -- (W2.west)
+    node[midway, below]{$[T]_{\alpha^{\prime}}^{\beta^{\prime}}$};
+\end{tikzpicture}
+
+방법2. 단순 유도하기.
+
+$Q[T]_{\beta^{\prime}}=[I]_{\beta^{\prime}}^{\beta}[T]_{\beta^{\prime}}^{\beta^{\prime}}=[IT]_{\beta^{\prime}}^{\beta}=[TI]_{\beta^{\prime}}^{\beta}=[T]_{\beta}^{\beta}[I]_{\beta^{\prime}}^{\beta}=[T]_{\beta}Q$
+\end{proof}
+
+\textbf{Corollary}\, $A \in M_{n \times n}(F)$와 $F^n$의 순서기저 $\gamma$에 대해서 아래가 성립함.
+
+\[
+[L_A]_{\gamma}=Q^{-1}AQ
+\]
+
+이때, $n \times n$ 행렬 $Q$의 $j$열은 $\gamma$의 $j$번째 벡터임.
 
 
 \newpage
@@ -843,9 +1336,90 @@ $\sigma(n)=a_n\,(n=1,2,3, \cdots)$인 수열 $\sigma$는 $(a_n)$이라 표기하
 공리(Axiom) : 증명할 필요 없이 자명한 진리이자 다른 명제들을 증명할 때 전제로 사용되는 기본적인 가정.
 
 
+\newpage
+
+
 \section*{5. 행렬(matrix)}
+\subsubsection*{1) 정의}
+$F$에서 성분을 가져온 $m \times n$ 행렬은 아래와 같은 직사각형 모양의 배열임.
+
+\[
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n}\\
+a_{21} & a_{22} & \cdots & a_{2n}\\
+\vdots & \vdots & & \vdots\\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{pmatrix}
+\]
+
+$a_{ij}\,(1 \leq i \leq m,1 \leq j \leq n)$ $i=j$에 대해서 $i=j$인 성분을 대각성분(diagonal entry)라 함.
+
+성분 $a_{i1}, a_{i2}, \cdots ,a_{in}$은 이 행렬의 $i$행(row)라 함.\\
+행렬의 각 행은 $F^n$의 벡터로 나타낼 수 있음.
+
+성분 $a_{1j}, a_{2j}, \cdots ,a_{mj}$은 이 행렬의 $j$열(column)라 함.\\
+행렬의 각 열은 $F^m$의 벡터로 나타낼 수 있음.
+
+두 행렬에 대해 대응하는 성분이 모두 일치할 때, 두 행렬을 같다고 함.
+
+\subsubsection*{2) 영행렬(zero matrix)}
+모든 성분이 0인 행렬을 영행렬(zero matrix)이라 하고 $O$로 표기함.
+
+\subsubsection*{3) 정사각행렬(정방행렬, square matrix)}
+행의 개수와 열의 개수가 같은 행렬을 정사각행렬(정방행렬, square matrix)이라 함.
+
+\subsubsection*{4) 전치행렬(transpose matrix)}
+$m \times n$ 행렬 $A$의 행과 열을 바꾸어 얻은 행렬을 $A$의 전치행렬(transpose matrix)라 하고, $A^t$로 표기함.
+
+$(A_t)_{ij}=A_{ji}$임.
+
+임의의 두 행렬 $A,B$와 스칼라 $a,b$에 대해서, $(aA+bB)^t=aA^t+bB^t$임.\\
+임의의 행렬 $A$와 스칼라 $a$에 대해서, $(aA)^t=aA^t$임.
+
+임의의 두 행렬 $A,B$에 대해서, $(AB)^t=B^{t}A^{t}$임.
+
+\subsubsection*{5) 대칭행렬(symmetric matrix)}
+$A^t=A$인 행렬.
+
+대칭행렬이려면 정사각행렬이어야 함.
+
+\subsubsection*{6) 상삼각행렬(위삼각행렬, upper triangular matrix)}
+대각성분 아래의 모든 성분이 0인 행렬. 즉, $i>j$일 때 $A_{ij}=0$인 행렬.
+
+\subsubsection*{7) 대각행렬(diagonal matrix)}
+대각성분을 제외한 모든 성분이 0인 행렬.
 
 
+\newpage
+
+
+\subsubsection*{8) 크로네거 델타(Kronecker delta)와 항등행렬(identity matrix)}
+크로네커 델타(Kronecker delta)는 아래과 같이 정의함.
+
+\begin{center}
+$i=j$일 때 $\delta_{ij}=1$이고, $i \neq j$일 때, $\delta_{ij}=0$
+\end{center}
+
+$n \times n$ 항등행렬 $I_n$의 성분은 $(I_n)_{ij}=\delta_{ij}$임.\\
+즉, 항등행렬은 정사각행렬 중 대각성분은 전부 1이고 나머지는 0인 행렬임.
+
+가리키는 것이 명확하면 $n$을 생략하여 $I$라 표기하기도 함.
+
+항등행렬은 $M_{n \times n}(F)$에서 곱셈에 대한 항등원임.\\
+즉, 행렬 $A$에 항등행렬을 곱한 결과는 $A$임.\\
+
+
+\section*{6. 집합(set)}
+\subsubsection*{1) 집합의 합(sum)}
+공집합이 아닌 $S_1$과 $S_2$는 벡터공간 $V$의 부분집합임. 두 집합의 합(sum) $S_1 + S_2$는 아래과 같이 정의함.
+
+\[
+{x+y:x \in S_1,y \in S_2}
+\]
+
+\subsubsection*{2) 직합(direct sum)}
+벡터공간 $V$와 부분공간 $W_1,W_2$에 대해서 $W_1 \cap W_2 =\{0\}$이고 $W_1 + W_2=V$이면 $V$는 $W_1$과 $W_2$의 직합(direct sum)이라 하고 
+$V=W_1 \oplus W_2$라 표기함.
 
 
 
