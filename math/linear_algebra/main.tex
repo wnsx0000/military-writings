@@ -1,0 +1,70 @@
+\documentclass[10pt, a4paper]{article}
+\title{\textbf{{\Huge 프리드버그 선형대수학 요약본}}}
+\author{Lee Jhun Hyeok\,(wnsx0000@gmail.com)}
+\date{\today}
+
+\usepackage{graphicx} % Required for inserting images
+\usepackage{kotex}
+\usepackage{geometry}
+\usepackage{parskip}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{mdframed}
+\newmdtheoremenv{DEF}{Definition}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\geometry{
+ a4paper,
+ left=25mm,
+ right=25mm,
+ top=30mm,
+ bottom=30mm
+ }
+ \hbadness=199999  % or any number >=10000, 임시로 사용
+
+\begin{document}
+% 제목
+\maketitle
+
+% 목차
+\textbf{\textit{목차}}
+
+\textbf{\textit{Part 1. 벡터공간\\}}
+1. 벡터공간\\
+2. 부분공간\\
+3. 일차결합과 연립일차방정식\\
+4. 일차종속과 일차독립\\
+5. 기저와 차원
+
+\textbf{\textit{Part 2. 선형변환과 행렬\\}}
+1. 선형변환\\
+2. 선형변환의 행렬표현\\
+3. 선형변환의 합성과 행렬 곱\\
+4. 가역성과 동형사상\\
+5. 좌표변환 행렬
+
+\textbf{\textit{Part 3. 기본행렬연산과 연립일차방정식\\}}
+1. 기본행렬연산과 기본행렬\\
+2. 행렬의 랭크\\
+3. 역행렬 구하기\\
+
+
+\newpage
+
+% 내용
+%1.벡터공간
+\input{articles/part1}
+
+%2.선형변환과 행렬
+\input{articles/part2}
+
+%3.기본행렬연산과 연립일차방정식
+\input{articles/part3}
+
+%기타
+\input{articles/partelse}
+
+\end{document}
