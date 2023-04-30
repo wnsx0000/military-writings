@@ -1,0 +1,159 @@
+\part*{+ 기타}
+
+\section*{1. 순서쌍(tuple)}
+
+\subsubsection*{1) 정의\\}
+\begin{DEF}
+$a_1,a_2,\cdots,a_n$이 체 $F$의 원소일 때, $(a_1,a_2, ... ,a_n)$ 꼴의 수학적 대상을 $F$에서 성분을 가져온 $n$순서쌍(n-tuple)이라고 함.
+
+$n$순서쌍에서 $a_1,a_2, ... ,a_n$을 $n$순서쌍의 성분(entry, component)이라고 함.
+\end{DEF}
+
+$F$에서 성분을 가져온 두 $n$순서쌍 $(a_1,a_2, ... ,a_n)$과 $(b_1,b_2, ... ,b_n)$은 $a_i=b_i$일 때 같다(equal)고 함.
+
+\section*{2. 다항식(polynomial)}
+\subsubsection*{1) 정의\\}
+\begin{DEF}
+계수가 체 $F$의 원소인 다항식은 $f(x)=a_nx_n+a_{n-1}x^{n-1}+ \cdots +a_1x+a_0$로 정의함.
+
+이때 $n$은 음이 아닌 정수임.
+
+각 $a_k$를 $x_k$의 계수(coefficient)라고 함.
+\end{DEF}
+
+$f(x)=0$이면 이를 0 다항식(zero coefficient)라고 함.\\
+0 다항식의 차수는 편의를 위해 -1로 정의함.
+
+다항식의 차수(degree)는 계수가 0이 아닌 항의 $x$의 지수 중 가장 큰 값으로 정의함.
+
+각 항이 전부 일치하는 두 다항식은 같다고 함.
+
+$F$가 무한집합일 때, $F$에서 계수를 가져온 다항식을 $F$에서 $F$로 가는 함수로 볼 수 있음.
+
+다항함수 $f(x)=a_nx_n+a_{n-1}x^{n-1}+ \cdots +a_1x+a_0$는 간단히 $f(x)$또는 $f$로 씀.
+
+\section*{3. 수열(sequence)}
+\subsubsection*{1) 정의\\}
+\begin{DEF}
+체 $F$에서 정의된 수열은 자연수 집합을 정의역, $F$를 공역으로 하는 함수임.
+\end{DEF}
+
+$\sigma(n)=a_n\,(n=1,2,3, \cdots)$인 수열 $\sigma$는 $(a_n)$이라 표기하기도 함.
+
+\section*{4. 정리}
+정리(Theorem) : 증명을 통해 참임이 밝혀진 명제.
+
+보조정리(Lemma) : 증명된 명제로서 다른 결과를 증명하는 데 주로 사용되는 명제.
+
+따름정리(Corollary) : 정리가 증명되었을 때, 그것으로부터 파생되어 나오는 명제.
+
+공리(Axiom) : 증명할 필요 없이 자명한 진리이자 다른 명제들을 증명할 때 전제로 사용되는 기본적인 가정.
+
+
+\newpage
+
+
+\section*{5. 행렬(matrix)}
+\subsubsection*{1) 정의\\}
+\begin{DEF}
+$F$에서 성분을 가져온 $m \times n$ 행렬은 아래와 같은 직사각형 모양의 배열임.
+
+\[
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n}\\
+a_{21} & a_{22} & \cdots & a_{2n}\\
+\vdots & \vdots & & \vdots\\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{pmatrix}
+\]
+\end{DEF}
+
+$a_{ij}\,(1 \leq i \leq m,1 \leq j \leq n)$ $i=j$에 대해서 $i=j$인 성분을 대각성분(diagonal entry)라 함.
+
+성분 $a_{i1}, a_{i2}, \cdots ,a_{in}$은 이 행렬의 $i$행(row)이라 함.\\
+행렬의 각 행은 $F^n$의 벡터로 나타낼 수 있음.
+
+성분 $a_{1j}, a_{2j}, \cdots ,a_{mj}$은 이 행렬의 $j$열(column)이라 함.\\
+행렬의 각 열은 $F^m$의 벡터로 나타낼 수 있음.
+
+두 행렬에 대해 대응하는 성분이 모두 일치할 때, 두 행렬을 같다고 함.
+
+\subsubsection*{2) 영행렬(zero matrix)\\}
+\begin{DEF}
+모든 성분이 0인 행렬을 영행렬(zero matrix)이라 하고 $O$로 표기함.
+\end{DEF}
+
+\subsubsection*{3) 정사각행렬(정방행렬, square matrix)\\}
+\begin{DEF}
+행의 개수와 열의 개수가 같은 행렬을 정사각행렬(정방행렬, square matrix)이라 함.
+\end{DEF}
+
+\subsubsection*{4) 전치행렬(transpose matrix)\\}
+\begin{DEF}
+$m \times n$ 행렬 $A$의 행과 열을 바꾸어 얻은 행렬을 $A$의 전치행렬(transpose matrix)라 하고, $A^t$로 표기함.
+\end{DEF}
+
+$(A_t)_{ij}=A_{ji}$임.
+
+임의의 두 행렬 $A,B$와 스칼라 $a,b$에 대해서, $(aA+bB)^t=aA^t+bB^t$임.\\
+임의의 행렬 $A$와 스칼라 $a$에 대해서, $(aA)^t=aA^t$임.
+
+임의의 두 행렬 $A,B$에 대해서, $(AB)^t=B^{t}A^{t}$임.
+
+\subsubsection*{5) 대칭행렬(symmetric matrix)\\}
+\begin{DEF}
+$A^t=A$인 행렬.
+\end{DEF}
+
+대칭행렬이려면 정사각행렬이어야 함.
+
+\subsubsection*{6) 상삼각행렬(위삼각행렬, upper triangular matrix)\\}
+\begin{DEF}
+대각성분 아래의 모든 성분이 0인 행렬. 즉, $i>j$일 때 $A_{ij}=0$인 행렬.
+\end{DEF}
+
+\subsubsection*{7) 대각행렬(diagonal matrix)\\}
+\begin{DEF}
+대각성분을 제외한 모든 성분이 0인 행렬.
+\end{DEF}
+
+
+\newpage
+
+
+\subsubsection*{8) 크로네거 델타(Kronecker delta)와 항등행렬(identity matrix)}
+크로네커 델타(Kronecker delta)는 아래과 같이 정의함.\\
+
+\begin{DEF}
+$i=j$일 때 $\delta_{ij}=1$이고, $i \neq j$일 때, $\delta_{ij}=0$
+\end{DEF}
+
+항등행렬(identity matrix)는 아래와 같이 정의함.\\
+
+\begin{DEF}
+$n \times n$ 항등행렬 $I_n$의 성분은 $(I_n)_{ij}=\delta_{ij}$임.\\
+즉, 항등행렬은 정사각행렬 중 대각성분은 전부 1이고 나머지는 0인 행렬임.
+\end{DEF}
+
+가리키는 것이 명확하면 $n$을 생략하여 $I$라 표기하기도 함.
+
+항등행렬은 $M_{n \times n}(F)$에서 곱셈에 대한 항등원임.\\
+즉, 행렬 $A$에 항등행렬을 곱한 결과는 $A$임.\\
+
+
+\section*{6. 집합(set)}
+\subsubsection*{1) 집합의 합(sum)\\}
+\begin{DEF}
+공집합이 아닌 $S_1$과 $S_2$는 벡터공간 $V$의 부분집합임. 두 집합의 합(sum) $S_1 + S_2$는 아래과 같이 정의함.
+
+\[
+{x+y:x \in S_1,y \in S_2}
+\]
+\end{DEF}
+
+\subsubsection*{2) 직합(direct sum)\\}
+\begin{DEF}
+벡터공간 $V$와 부분공간 $W_1,W_2$에 대해서 $W_1 \cap W_2 =\{0\}$이고 $W_1 + W_2=V$이면 $V$는 $W_1$과 $W_2$의 직합(direct sum)이라 하고 $V=W_1 \oplus W_2$라 표기함.
+\end{DEF}
+
+
