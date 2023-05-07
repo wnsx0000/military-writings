@@ -1,0 +1,430 @@
+\part{\textit{\underline{행렬식}}}
+
+\part*{1. 행렬식의 엄밀한 정의}
+
+교대 n-선형함수 $\delta:M_{n \times n}(F) \rightarrow F$ 중 $\delta(I)=1$인 $\delta$는 행렬식임.
+
+\section*{1. n-선형함수(n-linear function, multi-linear)}
+\subsubsection*{1) 정의\\}
+\begin{DEF}
+$n \times n$ 행렬의 다른 행이 고정되어 있을 떄, 행렬의 각 행에 대해서 선형인 함수 $\delta : M_{n \times n}(F) \rightarrow F$를 n-선형함수(n-linear function, multi-linear)라고 함.
+
+즉, 모든 $r=1,2, \cdots ,n$에 대해서, $F^n$에 속하는 임의의 세 벡터 $u,v,a_i$와 스칼라 $k$에 대해서 아래의 관계식을 만족하는 $\delta$는 n-선형임.
+
+\[
+\delta
+\begin{pmatrix}
+a_1\\
+\vdots\\
+a_{r-1}\\
+u+kv\\
+a_{r+1}\\
+\vdots\\
+a_n
+\end{pmatrix}
+=\delta
+\begin{pmatrix}
+a_1\\
+\vdots\\
+a_{r-1}\\
+u\\
+a_{r+1}\\
+\vdots\\
+a_n
+\end{pmatrix}
++k\delta
+\begin{pmatrix}
+a_1\\
+\vdots\\
+a_{r-1}\\
+v\\
+a_{r+1}\\
+\vdots\\
+a_n
+\end{pmatrix}
+\]
+\end{DEF}
+
+n-선형함수중 가장 주요한 것은 행렬식임.
+
+n-선형함수는 선형은 아니지만, 일종의 선형성을 가짐.\\
+
+
+\section*{2. 교대(alternating)}
+\subsubsection*{1) 정의\\}
+\begin{DEF}
+이웃한 두 행이 서로 같은 행렬 $A \in M_{n \times n}(F)$에 대해서, $\delta(A)=0$인 n-선형함수 $\delta:M_{n \times n}(F) \rightarrow F$를 교대(alternating)라고 함.
+\end{DEF}
+
+즉, 이웃한 두 행이 서로 같은 행렬을 넣으면 0이 되는 n-선형함수를 교대라고 함.
+
+Theorem 4.10에 의하면, 임의의 두 행이 같기만 해도 0이 됨.
+
+\subsubsection*{2) 교대와 기본연산}
+Theorem 4.10의 Corollary 3과 Theorem 4.11에 의해, 교대인 n-선형함수에 넣는 행렬에 대해서 기본연산을 적용하는 것은 기본연산의 종류에 따라 상이한 효과가 발생함.
+
+1형 기본연산은 값의 부호를 바꾸고, 2형 기본연산은 값에 $k$가 곱해지고, 3형 기본연산은 값을 보존함.
+
+
+\newpage
+
+
+\section*{3. 행렬식의 엄밀한 정의}
+\subsubsection*{1) 행렬식을 정의하는 세 번째 성질}
+어떤 교대 n-선형함수가 특정 조건에서 행렬식임을 보이려고 할 때, 임의의 교대 n-선형함수의 스칼라 곱은 여전히 교대 n-선형함수임. 즉, 어떤 스칼라 곱이 행렬식에 해당하는지 정의해야 함.
+
+Theorem 4.12에 의하면, 이를 위한 행렬식을 정의하는 세 번째 성질은 $n \times n$ 항등행렬 $I_n$의 값이 1인 것임.
+
+\subsubsection*{2) 행렬식의 엄밀한 정의\\}
+\begin{DEF}
+어떤 함수 $\delta:M_{n \times n}(F) \rightarrow F$가 행렬식이기 위한 조건은 아래와 같음.
+
+\begin{enumerate}
+    \item $\delta$가 n-선형함수(multi-linear)임.
+    \item $\delta$가 교대(alternating)임.
+    \item $\delta(I)=1$임.
+\end{enumerate}
+\end{DEF}
+
+즉, 교대 n-선형함수 $\delta:M_{n \times n}(F) \rightarrow F$ 중 $\delta(I)=1$인 $\delta$는 행렬식임.
+
+당연히 n-선형함수(multi-linear)와 교대(alternating)의 성질을 행렬식에 적용할 수 있음.
+
+이렇게 정의된 행렬식은 정사각행렬 집합을 정의역으로 하고 스칼라를 함숫값으로 하는 특별한 함수임.\\
+
+
+\section*{4. 관련 정리}
+\subsubsection*{1) 행렬식을 정의하는 세 번째 성질}
+\textbf{Theorem 4.12}\, $\delta(I)=1$인 교대 n-선형함수 $\delta:M_{n \times n}(F) \rightarrow F$를 생각하자. 모든 $A \in M_{n \times n}(F)$에 대해서 $\delta(A)=det(A)$임.
+
+\begin{proof}
+$\delta(I)=1$인 교대 n-선형함수 $\delta:M_{n \times n}(F) \rightarrow F$와 $A \in M_{n \times n}(F)$를 생각하자.
+
+$A$의 랭크가 $n$ 미만이면(즉, $A$가 가역이 아님.) Theorem 4.10 Corollary 2, Theorem 4.7 Corollary에 의해 $\delta(A)=det(A)=0$임.
+
+$A$의 랭크가 $n$이면(즉, $A$가 가역임.) $A$는 기본행렬의 곱으로 나타낼 수 있음. $A=E_1E_2 \cdots E_m$라 하자. 
+Theorem 4.3, Theorem 4.5, Theorem 4.6\footnote{Theorem 4.3, Theorem 4.5, Theorem 4.6은 이 필기에 따로 정리하지 않았음.}, Theorem 4.10 Corollary 3에 의하면, 기본행렬 $E$에 대해 $\delta(E)=det(E)$가 성립함. 따라서 $\delta(A)$를 정리하면 아래와 같음.
+
+\[
+\delta(A)=\delta(E_1E_2 \cdots E_m)=det(E_1)\delta(E_2 \cdots E_m)=det(E_1E_2 \cdots E_m)=det(A)
+\]
+
+모든 $A$에 대해서 $\delta(A)=det(A)$임. 즉, $\delta(I)=1$인 교대 n-선형함수 $\delta$는 행렬식임.
+\end{proof}
+
+
+\newpage
+
+
+\subsubsection*{2) 교대(alternating)의 성질}
+\textbf{Theorem 4.10}\, 교대 n-선형함수 $\delta:M_{n \times n}(F) \rightarrow F$에 대해서 아래가 성립함.
+
+\begin{enumerate}
+    \item $A \in M_{n \times n}(F)$의 임의의 두 행을 교환하여 얻은 행렬을 $B$라고 하면, $\delta(B)=-\delta(A)$임.
+    \item $A \in M_{n \times n}(F)$의 임의의 두 행이 같으면 $\delta(A)=0$임.
+\end{enumerate}
+
+\begin{proof}
+(1) 이웃한 두 행을 교환하는 경우는 아래의 식에서 확인할 수 있음.
+
+\[
+0=\delta
+\begin{pmatrix}
+a_1\\
+\vdots\\
+a_r+a_{r+1}\\
+a_r+a_{r+1}\\
+\vdots\\
+a_n
+\end{pmatrix}
+=\delta
+\begin{pmatrix}
+a_1\\
+\vdots\\
+a_r\\
+a_r\\
+\vdots\\
+a_n
+\end{pmatrix}
++\delta
+\begin{pmatrix}
+a_1\\
+\vdots\\
+a_{r+1}\\
+a_r\\
+\vdots\\
+a_n
+\end{pmatrix}
++\delta
+\begin{pmatrix}
+a_1\\
+\vdots\\
+a_r\\
+a_{r+1}\\
+\vdots\\
+a_n
+\end{pmatrix}
++\delta
+\begin{pmatrix}
+a_1\\
+\vdots\\
+a_{r+1}\\
+a_{r+1}\\
+\vdots\\
+a_n
+\end{pmatrix}
+=0+\delta(A)+\delta(B)+0
+\]
+
+이므로 $\delta(A)=-\delta(B)$임.
+
+이웃하지 않은 두 행을 교환하는 경우에는 이웃한 두 행끼리의 반복 교환을 통해 확인할 수 있음.
+
+(2) 두 행이 이웃한 경우, 교대의 정의에 의해 성립함.
+
+두 행이 이웃하지 않은 경우, 동일한 행이 이웃하도록 행을 교환하면 교대의 정의에 의해 성립함.
+\end{proof}
+
+
+\textbf{Corollary 1}\, 교대 n-선형함수 $\delta:M_{n \times n}(F) \rightarrow F$가 있음. 행렬 $A \in M_{n \times n}(F)$의 어느 행의 스칼라 배를 다른 행에 더하여 얻은 행렬을 $B$라 하면 $\delta(B)=\delta(A)$임.
+
+즉, 3형 기본행연산은 행렬식 값을 보존함.
+
+\begin{proof}
+$B$를 $i$행의 $k$배를 $j$행에 더한 행렬, 행렬 $C$를 $A$의 $j$행을 $i$행으로 바꾼 행렬이라고 하자. 교대 n-선형함수의 정의에 의해 $\delta(B)=\delta(A)+k\delta(C)=\delta(A)$임.
+\end{proof}
+
+\textbf{Corollary 2}\, 교대 n-선형함수 $\delta:M_{n \times n}(F) \rightarrow F$가 있음. $M \in M_{n \times n}(F)$의 랭크가 $n$ 미만이면 $\delta(M)=0$임.
+
+\begin{proof}
+독립인 행의 개수가 랭크이므로, 랭크가 n 미만이라는 것은 어떤 행이 다른 행들의 일차결합으로 표현된다는 것임. 즉, 3형 기본연산을 적용하면 동일한 행이 2개 이상 존재하도록 만들 수 있음. 이럴 경우 Theorem 4.10에 의해 $\delta(M)=0$임.
+\end{proof}
+
+\textbf{Corollary 3}\, 교대 n-선형함수 $\delta:M_{n \times n}(F) \rightarrow F$와 $M_{n \times n}(F)$에 속하는 1형 기본행렬 $E_1$, 2형 기본행렬 $E_2$, 3형 기본행렬 $E_3$를 생각하자. 특히, $E_2$는 $I$의 어떤 행에 영이 아닌 스칼라 $k$를 곱해서 얻은 행렬임. 이때, 아래가 성립함.
+
+\[
+\delta(E_1)=-\delta(I),\,\,\delta(E_2)=k\delta(I),\,\,\delta(E_3)=\delta(I)
+\]
+
+즉, 1형 기본연산은 행렬식 값의 부호를 바꾸고, 2형 기본연산은 행렬식 값에 $k$가 곱해지고, 3형 기본연산은 행렬식 값을 보존함.
+
+\begin{proof}
+Theorem 4.10의 (1), n-선형함수(multi-linear)의 정의, Theorem 4.6 참고.
+\end{proof}
+
+
+\newpage
+
+
+\part*{2. n차 정사각행렬의 행렬식}
+
+\section*{1. n차 정사각행렬의 행렬식}
+\subsubsection*{1) 정의\footnote{이 정의에 대한 유도를 생각해 볼 수 있음. $det(A)$를 스칼라와 기본행렬의 곱으로 정리해 보자.}\\}
+\begin{DEF}
+체 $F$의 원소를 성분으로 가지는 $n \times n$ 행렬 $A$의 행렬식(determinant)은 $det(A)$ 또는 $|A|$로 표기하고, 아래와 같이 계산할 수 있음.
+
+1. $A$가 $1 \times 1$ 행렬인 경우, $det(A)=A_{11}$임.
+
+2. $A$가 $2 \times 2$ 행렬인 경우, $det(A)=A_{11}A_{22}-A_{12}A_{21}$임. ($ad-bc$)
+
+3. $A$가 $n > 2$인 $n$에 대해서 $n \times n$ 행렬인 경우, 모든 $i$에 대해서 $i$행에 대한 여인수 전개를 하면 행렬식은 아래와 같음.
+
+\[
+det(A)=\sum^{n}_{j=1}(-1)^{i+j}A_{ij}det(\Tilde{A}_{ij})
+\]
+
+또는 모든 $j$에 대해서 $j$열에 대한 여인수 전개를 하면 행렬식은 아래와 같음.
+
+\[
+det(A)=\sum^{n}_{i=1}(-1)^{i+j}A_{ij}det(\Tilde{A}_{ij})
+\]
+\end{DEF}
+
+n차 정사각행렬의 행렬식은 그 정의\footnote{프리드버그 p.234.}에 의하면 첫번째 행에 대한 여인수 전개로 구하는 것임. 하지만 Theorem 4.4에 의해, n차 정사각행렬의 행렬식은 임의의 행에 대한 여인수 전개로 구할 수 있음. 또한 Theorem 4.8에 의하면, 행렬식은 임의의 열에 대한 여인수 전개로도 구할 수 있음.
+
+\subsubsection*{2) 여인수(cofactor)\\}
+\begin{DEF}
+스칼라 $(-1)^{1+j}A_{1j}det(\Tilde{A}_{1j})$는 $A$의 $i$행 $j$열 성분에 대한 여인수(cofactor)라 함.
+
+여인수를 $c_{ij}=(-1)^{1+j}A_{1j}det(\Tilde{A}_{1j})$로 표기했을 때, 행렬식을 아래와 같이 여인수들의 일차결합으로 나타낼 수 있음. 이를 $i$행에 대한 여인수 전개(cofactor expansion) 또는 라플라스 전개(Laplace expansion)라고 함.
+
+\[
+det(A)=A_{i1}c_{i1}+A_{i2}c_{i2}+ \cdots +A_{in}c_{in}
+\]
+\end{DEF}
+
+\subsubsection*{3) 소행렬\\}
+\begin{DEF}
+$A$의 $i$행과 $j$열을 지워서 얻은 $(n-1) \times (n-1)$ 행렬을 $A$의 $(i,j)$ 소행렬이라고 하고, $\Tilde{A}_{ij}$로 표기함.
+\end{DEF}
+
+
+\newpage
+
+
+\section*{2. 상삼각행렬로 행렬식 구하기}
+\subsubsection*{1) 상삼각행렬로 행렬식 구하기}
+\textbf{Theorem}\, 상삼각행렬의 행렬식은 대각성분의 곱과 같음.
+
+임의의 정사각행렬은 1형과 3형 기본행연산만으로 상삼각행렬로 바꿀 수 있으므로, 상삼각행렬로 전환하여 행렬식을 구할 수 있음.
+
+
+\section*{3. 관련 정리}
+\subsubsection*{1) 임의의 행에 대한 여인수 전개}
+\textbf{Theorem 4.4}\, 정사각행렬의 행렬식은 임의의 행에 대해서 여인수 전개하여 구할 수 있음. 즉 $A \in M_{n \times n}(F)$와 임의의 정수 $i(1 \leq i \leq n)$에 대해서 아래가 성립함.
+
+\[
+det(A)=\sum^{n}_{j=1}(-1)^{i+j}A_{ij}det(\Tilde{A}_{ij})
+\]
+
+증명은 프리드버그 p.238 참고.\\
+
+
+\newpage
+
+
+\part*{3. 행렬식의 성질}
+
+\section*{1. 행렬식의 엄밀한 정의에 의한 성질}
+\subsubsection*{1) 기본 성질}
+행렬식은 $\delta(I)=1$을 만족시키는 교대 n-선형함수임. 이에 따른 (매우 당연한) 성질을 정리하면 아래와 같음.
+
+1. 행렬식은 선형이 아니지만 각 행에 대해서 선형성을 가짐.\footnote{Theorem 4.1, Theorem 4.3, Theorem 4.5은 행렬식이 multi-linear의 성질을 보이고 있기 때문에 이 필기에 정리하지 않음.} (multi-linear)\\
+2. 행렬의 두 행이나 열이 서로 같으면 그 행렬식은 0임.\footnote{Theorem 4.4 Corollary, Theorem 4.5, Theorem 4.6는 행렬식이 alternating의 성질을 보이고 있기 때문에 이 필기에 정리하지 않음.}\\ (alternating)
+3. $det(I)=1$임.
+
+\subsubsection*{2) 기본연산과 행렬식}
+Theorem 4.8, Theorem 4.10의 Corollary 3에 의하면, 기본연산이 행렬식에 미치는 영향은 아래와 같음.
+
+1. $n \times n$ 행렬 $A$의 두 행 또는 두 열을 교환하여 얻은 행렬을 $B$라 하면 $det(B)=-det(A)$임. (1형)\\
+2. $n \times n$ 행렬 $A$의 한 행 또는 열에 스칼라 $k$를 곱하여 얻은 행렬을 $B$라 하면 $det(B)=kdet(A)$임. (2형)\\
+3. $n \times n$ 행렬 $A$의 한 행 또는 열에 다른 행에 스칼라 배를 더하여 얻은 행렬을 $B$라 하면 $det(B)=det(A)$임. (3형)\\
+
+
+\section*{2. 행렬식의 성질}
+\subsubsection*{1) 행렬식과 행렬 곱}
+Theorem 4.7에 의하면, $det(AB)=det(A)det(B)$임. 즉, 행렬식은 행렬의 곱을 보존함.\footnote{즉, 곱하고 행렬식을 구하나 행렬식을 각각 구하고 곱하나 똑같음.}.
+
+\subsubsection*{2) 행렬식과 가역성}
+Theorem 4.7의 Corollary에 의하면, 행렬이 가역이기 위한 필요충분조건은 그 행렬식이 0이 아닌 것임.
+
+이때 Theorem 4.2에 의하면, $2 \times 2$ 정사각행렬인 경우 그 역행렬을 간단히 구할 수 있음.
+
+추가로 Theorem 4.3 Corollary에 의하면, 모든 원소가 0인 행이나 열이 존재할 경우, 그 행렬의 행렬식은 0임.
+
+\subsubsection*{3) 전치행렬의 행렬식}
+Theorem 4.8에 의하면 전치행렬의 행렬식은 원래 행렬의 행렬식과 같음.
+
+이를 응용하면 행에 대한 개념들을 열에 대한 것으로까지 확장할 수 있음. 행렬식은 열에 대한 여인수 전개로도 구할 수 있고, 기본행연산 대신 기본열연산으로 행렬을 변형하여 행렬식을 구할 수도 있음. 이때, 기본열연산에 따른 행렬식의 변화는 행의 그것과 같음.
+
+
+\newpage
+
+
+\section*{3. 행렬식의 기하학적 해석}
+\subsubsection*{1) 2차 정사각행렬}
+2차 정사각행렬과 그 행렬식은 평행사변형의 넓이로서 기하학적으로 해석해 볼 수 있음. 행렬의 각 행을 묶어 각각을 좌표계에서 원점을 시점으로 하는 화살표로 생각하면 평행사변형이 유일하게 결정됨. 이때, 행렬식의 절댓값이 평행사변형의 넓이라는 것.
+
+프리드버그 p.226 참고.
+
+\subsubsection*{2) n차 정사각행렬}
+행렬의 각 행을 묶어 좌표계에서 원점을 시점으로 하는 화살표로 생각하면 $n$차원 입체도형이 유일하게 결정됨. 이때, 행렬식의 절댓값이 해당 입체도형의 n차원 부피라는 것.
+
+프리드버그 p.251 참고. 미적분에 대한 이해가 필요하다고 함.\\
+
+
+\section*{4. 관련 정리}
+\subsubsection*{1) 행렬식과 행렬 곱}
+\textbf{Theorem 4.7}\, 임의의 $A,B \in M_{n \times n}(F)$에 대해서, $det(AB)=det(A)det(B)$임.
+
+프리드버그 p.267 Theorem 4.11에 의하면, 임의의 교대 n-선형함수 $\delta:M_{n \times n}(F) \rightarrow F$에 대해 $\delta(AB)=\delta(A)\delta(B)$가 성립함.
+
+\begin{proof}
+$A$가 기본행렬인 경우, $det(AB)=det(A)det(B)$임이 성립함.
+
+$A$의 랭크가 $n$보다 작은 경우, $rank(AB) \leq rank(A) < n$이므로 $det(AB)=det(A)det(B)=0$으로 성립함.
+
+$A$의 랭크가 $n$인 경우, $A$는 기본행렬의 곱으로 나타낼 수 있음. $A=E_{m} \cdots E_{2}E_{1}$이라고 하자. $A$가 기본행렬인 경우 $det(AB)=det(A)det(B)$이므로, $det(AB)=det(E_{m} \cdots E_{2}E_{1}B)=det(E_{m}) \cdots det(E_{1})det(E_{B})=det(E_{m} \cdots E_{2}E_{1})det(B)=det(A)det(B)$로 성립함.
+\end{proof}
+
+\textbf{Corollary}\, 행렬 $A \in M_{n \times n}(F)$가 가역이기 위한 필요충분조건은 $det(A) \neq 0$임. 특히, $A$가 가역이면 $det(A^{-1})=\frac{1}{det(A)}$임.
+
+\begin{proof}
+1. 행렬 $A \in M_{n \times n}(F)$가 가역 $\rightarrow$ $det(A) \neq 0$\\
+$det(A)det(A^{-1})=det(AA^{-1})=det(I)=1$이므로 $det(A) \neq 0$이고, $det(A)=\frac{1}{det(A^{-1})}$임.
+
+2. $det(A) \neq 0$ $\rightarrow$ 행렬 $A \in M_{n \times n}(F)$가 가역\footnote{프리드버그 기준 Theorem 4.6 Corollary의 내용임. Theorem 4.10 Corollary 2에서 확인할 수도 있음.}\\
+행렬 $A$가 가역이 아니면 $det(A)=0$임을 보이자. $A$가 가역이 아니면 어떤 행을 다른 행들의 일차결합으로 표현할 수 있음. $A$의 각 행을 $a_1, \cdots, a_n$, 일차결합으로 표현될 수 있는 행을 $a_r$이라 하자. $a_r$은 스칼라 $c_1, \cdots ,c_n$에 대해 $a_r=c_1a_1+ \cdots +c_{r-1}a_{r-1}+c_{r+1}a_{r+1}+ \cdots +c_na_n$으로 표현할 수 있음. 행렬 $B$를 $A$의 $a_r$을 제외한 각 행 $a_1, \cdots ,a_n$에 각각 스칼라 $-c_1, \cdots ,-c_n$를 곱해 $r$행에 더한 행렬이라고 하자. 즉, $B$는 $A$에 3형 기본연산을 반복해 얻은 행렬임. $B$의 $r$번째 행은 모든 원소가 0이므로, $det(B)=det(A)=0$임.
+\end{proof}
+
+
+\newpage
+
+
+\subsubsection*{2) 2차 정사각행렬의 행렬식과 가역성}
+\textbf{Theorem 4.2}\, 행렬 $A \in M_{2 \times 2}(F)$에 대해서 $A$의 행렬식이 0이 아니기 위한 필요충분조건은 $A$가 가역행렬인 것임. 특히, $A$가 가역행렬이면 역행렬은 아래와 같음.
+
+\[
+A^{-1}=\frac{1}{det(A)}
+\begin{pmatrix}
+A_{22} & -A_{12}\\
+-A_{21} & A_{11}
+\end{pmatrix}
+\]
+
+\begin{proof}
+1. $det(A) \neq 0$ $\rightarrow$ $A$가 가역\\
+$det(A) \neq 0$인 경우, 위의 역행렬 식을 $A$에 직접 곱해서 가역임을 확인할 수 있음.
+
+2. $A$가 가역 $\rightarrow$ $det(A) \neq 0$\\
+행렬 $A$가 아래와 같다고 하자.
+
+\[
+A=
+\begin{pmatrix}
+A_{11} & A_{12}\\
+A_{21} & A_{22}
+\end{pmatrix}
+\]
+
+$A$가 가역이므로 $A_{11}$, $A_{21}$이 모두 0일 수 없음. $A_{11} \neq 0$일 때, 3형 기본연산으로 $A$를 아래와 같이 바꿀 수 있음.
+
+\[
+\begin{pmatrix}
+A_{11} & A_{12}\\
+0 & A_{22} - \frac{A_{12}A_{21}}{A_{11}}
+\end{pmatrix}
+\]
+
+이때, $A$가 가역이므로 $A_{22} - \frac{A_{12}A_{21}}{A_{11}} \neq 0$이어야 함. 즉, 정리하면 $det(A)= A_{11}A_{22}-A_{12}A_{21} \neq 0$임.
+\end{proof}
+
+
+\subsubsection*{3) 어떤 행의 성분이 모두 0인 경우의 행렬식}
+\textbf{Theorem 4.3 Corollary}\, 행렬 $A \in M_{n \times n}(F)$의 어느 행의 모든 성분이 0이면 $det(A)=0$임.
+
+\begin{proof}
+$n \times n$ 행렬 $A \in M_{n \times n}(F)$에 대해 생각하자.
+
+$n=1$인 경우 $A=(0)$이므로 $det(A)=0$이 성립함.
+
+$n=k-1$일 때 위 정리가 성립한다고 가정하자. $n=k$인 경우, $i$행에 대해 여인수 전개로 구한 $A$의 행렬식은 아래와 같음.
+
+\[
+det(A)=\sum^{n}_{j=1}(-1)^{i+j}A_{ij}det(\Tilde{A}_{ij})
+\]
+
+모든 성분이 0인 행을 $r$행이라고 했을 때, $r=i$이면 위 식에서 $A_ij$가 모두 0이므로 위 정리가 성립함. $r \neq i$이면 위 식의 소행렬 $det(\Tilde{A}_{ij})$가 모든 성분이 0인 행을 가지는데, 이 경우 가정에 의해 위 정리가 성립함.
+\end{proof}
+
+\subsubsection*{4) 전치행렬의 행렬식}
+\textbf{Theorem 4.8}\, 임의의 $A \in M_{n \times n}(F)$에 대해서 $det(A^{t})=det(A)$임.
+
+\begin{proof}
+$A$가 가역이 아니면 $rank(A)=rank(A^{t}) \leq n$이므로 $det(A)=det(A^{t})=0$임.
+
+$A$가 가역이면 기본연산으로 표현할 수 있으므로, $A=E_1E_2 \cdots E_m$, $A^{t}=E^{t}_{m} \cdots E^{t}_{2}E^{t}_{1}$임. $det(E)=det(E^{t})$이므로\footnote{프리드버그 4.2절 연습문제 29 참고.}, $det(A^{t})$를 Theorem 4.7을 사용하여 정리하면 $det(A^{t})=det(A)$임.
+\end{proof}
+
+
+\newpage
