@@ -1,4 +1,7 @@
 \part{\textit{\underline{선형변환과 행렬}}}
+
+2장에서는 처음부터 끝까지 선형변환이 곧 행렬이고 행렬이 곧 선형변환이라는 이야기를 함.
+
 \part*{1. 선형변환}
 
 \section*{1. 선형변환(linear transformation)}
@@ -33,17 +36,14 @@ T(\sum_{i=1}^{n}{a_i x_i})=\sum_{i=1}^{n}{a_i T(x_i)}
 어떤 함수가 선형인지 보일 때, 주로 성질2를 사용함.
 
 \subsubsection*{3) 항등변환(identity transformation)과 영변환(zero transformation)}
-항등변환 $I_V : V \rightarrow V$는 모든 $x \in V$에 대해서 $I_V(x)=x$라 정의되는 선형임. 간단히 $I$라 표기하기도 함.
-
+항등변환 $I_V : V \rightarrow V$는 모든 $x \in V$에 대해서 $I_V(x)=x$라 정의되는 선형임. 간단히 $I$라 표기하기도 함.\\
 영변환 $T_0 : V \rightarrow W$는 모든 $x \in V$에 대해서 $T_0(x)=0$이라 정의되는 선형임.
 
 \subsubsection*{4) 선형연산자(linear operator)}
-정의역과 공역이 같은 선형변환.\\
-다시 말해, 벡터공간 $V$에서 자기 자신으로 가는 선형변환.
+정의역과 공역이 같은 선형변환. 다시 말해, 벡터공간 $V$에서 자기 자신으로 가는 선형변환.
 
 \subsubsection*{5) 선형의 예시}
-대표적인 선형 기하 변환으로는 회전, 대칭, 사영(한 값을 0으로 만드는 것)이 있음.
-
+대표적인 선형 기하 변환으로는 회전, 대칭, 사영(한 값을 0으로 만드는 것)이 있음.\\
 행렬을 전치행렬로 변환하는 함수, 미분, 적분 등 또한 선형임.\\
 
 
@@ -118,6 +118,30 @@ nullity(T)+rank(T)=dim(V)
 
 선형변환 $T$에 대해서, $V$의 기저 중 일부는 0으로 가고 나머지는 상공간으로 간다는 의미.
 
+아래의 다이어그램은 벡터공간 $V,W$와 선형변환 $T:V \rightarrow W$에 대해서, dimension theorem에서 기저가 어떻게 이동하는지를 보여줌.
+
+\begin{tikzpicture}
+%Nodes
+\node[]     (V)                     {V};
+\node[]     (W)     [right=of V]    {W};
+\node[]     (N)     [below=of V]    {N(T)};
+\node[]     (R)     [below=of W]    {R(T)};
+\node[]     (v0)    [below=of N]    {0};
+\node[]     (w0)    [below=of R]    {0};
+
+%Lines
+\draw[-]    (V.south) -- (N.north);
+\draw[-]    (W.south) -- (R.north);
+\draw[->]   (V.east) -- (R.north west)
+    node[midway, sloped, above]{T};
+\draw[-]    (N.south) -- (v0.north);
+\draw[-]    (R.south) -- (w0.north);
+\draw[->]   (N.east) -- (w0.north west)
+    node[midway, sloped, above]{T};
+\draw[->]   (v0.east) -- (w0.west)
+    node[midway, above]{T};
+\end{tikzpicture}
+
 \begin{proof}
 차원정리의 증명은 4가지 단계로 이루어짐.
 
@@ -146,6 +170,10 @@ $T$가 단사함수인 경우, $T(x)=0$인 $x$는 0밖에 없으므로 $N(T)=\{0
 $N(T)=\{0\}$인 경우, $T(x)=T(y)$라고 가정하자. $T(x)-T(y)=0$, $T(x-y)=0$인데 $N(T)=\{0\}$이므로 $x-y=0$, $x=y$임. 즉, $T$는 단사함수임.
 \end{proof}
 
+
+\newpage
+
+
 \subsubsection*{5) 차원이 같은 경우 동치인 명제들}
 \textbf{Theorem 2.5}\, 유한차원 벡터공간 $V,W$의 차원이 같을 때, 선형변환 $T:\,V \rightarrow W$에 대해서 아래의 세 명제는 동치임.
 
@@ -166,9 +194,6 @@ $R(T)$는 $W$의 부분공간이므로 정리 1.11에 의해 차원이 같으면
 \end{proof}
 
 
-\newpage
-
-
 \subsubsection*{6) linear extension theorem}
 \textbf{Theorem 2.6}\, $F$-벡터공간 $V,W$와 $V$의 기저 $\{v_1,v_2, \cdots ,v_n\}$을 생각하자. 벡터 $w_1,w_2, \cdots ,w_n \in W$에 대하여 아래의 조건을 만족시키는 선형변환 $T:\,V \rightarrow W$가 유일하게 존재함.\\
 
@@ -178,33 +203,9 @@ $i=1,2, \cdots ,n$에 대하여 $T(v_i)=w_i$
 
 즉, 정의역의 모든 값들을 보낼 필요 없이 기저의 원소만 보내 봐도 선형변환을 확정지을 수 있음. 기저에서 보낸 함숫값들의 조합은 선형변환에 따라 여러 가지가 있을 수 있는데, 각 조합에 대해서 선형변환이 유일하게 존재한다는 것.
 
-선형변환을 정의하는 기본적인 방법.
+선형변환을 정의하는 기본적인 방법. (기저만 보내면 충분함.)
 
 선형변환의 행렬표현에서 기저만으로 선형변환을 정의하는 것은 linear extension theorem이 그래도 된다는 것을 보장하기 때문임.
-
-아래의 다이어그램은 벡터공간 $V,W$와 선형변환 $T:V \rightarrow W$에 대해서, linear extension theorem에서 기저가 어떻게 이동하는지를 보여줌.
-
-\begin{tikzpicture}
-%Nodes
-\node[]     (V)                     {V};
-\node[]     (W)     [right=of V]    {W};
-\node[]     (N)     [below=of V]    {N(T)};
-\node[]     (R)     [below=of W]    {R(T)};
-\node[]     (v0)    [below=of N]    {0};
-\node[]     (w0)    [below=of R]    {0};
-
-%Lines
-\draw[-]    (V.south) -- (N.north);
-\draw[-]    (W.south) -- (R.north);
-\draw[->]   (V.east) -- (R.north west)
-    node[midway, sloped, above]{T};
-\draw[-]    (N.south) -- (v0.north);
-\draw[-]    (R.south) -- (w0.north);
-\draw[->]   (N.east) -- (w0.north west)
-    node[midway, sloped, above]{T};
-\draw[->]   (v0.east) -- (w0.west)
-    node[midway, above]{T};
-\end{tikzpicture}
 
 \begin{proof}
 $x \in V$는 $a_1,a_2, \cdots ,a_n \in F$에 대해서 $x=\sum_{i=1}^{n}{a_{i}v_{i}}$로 유일하게 표현할 수 있음.
@@ -276,7 +277,7 @@ a_{n}
 
 \subsubsection*{1) 정의\footnote{linear extension theorem이 이 정의가 가진 논리의 바탕이 됨.}\\}
 \begin{DEF}
-유한차원 벡터공간 $V,W$와 각각의 순서기저 $\beta = \{v_1,v_2, \cdots ,v_n\}$, $\gamma = \{w_1,w_2, \cdots ,w_m\}$, 선형변환 $T:\,V \rightarrow W$가 있음. $j=1,2, \cdots ,n$일 때, $j$마다 다음을 만족하는 유일한 스칼라 $a_{ij} \in F$가 존재함.
+유한차원 벡터공간 $V,W$와 각각의 순서기저 $\beta = \{v_1, \cdots ,v_n\}$, $\gamma = \{w_1, \cdots ,w_m\}$, 선형변환 $T:\,V \rightarrow W$가 있음. $j=1,2, \cdots ,n$일 때, $j$마다 다음을 만족하는 유일한 스칼라 $a_{ij} \in F$가 존재함.
 
 \[
 T(v_{j})=\sum_{i=1}^{m}{a_{ij}w_i}
@@ -406,8 +407,6 @@ $m \times n$ 행렬 $A$와 $n \times p$ 행렬 $B$에 대하여 두 행렬 $A,B$
 
 이 행렬 곱은 두 선형변환의 합성을 행렬로서 나타낸 연산임.
 
-추가로, 곱셈의 소거법칙은 성립하지 않음.
-
 \subsubsection*{2) 유도과정}
 유한차원 벡터공간 $V,W,Z$와 선형변환 $T:V \rightarrow W$, $U:W \rightarrow Z$가 있음. $V$의 순서기저 $\{v_1, \cdots , v_n\}$, $W$의 순서기저 $\{w_1, \cdots , w_m\}$, $Z$의 순서기저 $\{z_1, \cdots , z_p\}$에 대하여 $A=[U]^{\gamma}_{\beta}$, $B=[T]^{\beta}_{\alpha}$라 하자.
 
@@ -445,9 +444,10 @@ Theorem 2.10, 2.12, 2.16 등에서 확인할 수 있듯이, 선형변환의 합�
 \begin{enumerate}
     \item 분배법칙 성립.
     \item 결합법칙 성립.
-    \item 항등원 성립. (항등변환, 항등행렬)
+    \item 항등원 존재. (항등변환, 항등행렬)
     \item 스칼라 곱의 분배법칙 성립.
     \item 교환법칙 성립하지 않음.\footnote{즉, $TU \neq UT$, $AB \neq BA$임}\\
+    \item 곱셈의 소거법칙 성립하지 않음.
 \end{enumerate}
 
 
@@ -597,7 +597,7 @@ Theorem 2.15의 2번 성질에 의해 $A(BC)=(AB)C$임.
 
 \subsubsection*{1) 정의\\}
 \begin{DEF}
-벡터공간 $V,W$와 선형변환 $T:V \rightarrow W$를 생각하자. $TU=I_W$이고 $UT=I_V$인 함수 $U$를 $T$의 역함수(inverse)라 함. 이 역함수는 $T^{-1}$로 표기함. $T$가 가역이면 $T^(-1)$은 유일함.
+벡터공간 $V,W$와 선형변환 $T:V \rightarrow W$를 생각하자. $TU=I_W$이고 $UT=I_V$인 함수 $U$를 $T$의 역함수(inverse)라 함. 이 역함수는 $T^{-1}$로 표기함. $T$가 가역이면 $T^{-1}$은 유일함.
 
 역함수가 존재하는지를 가역(invertible)이라 함.
 \end{DEF}
@@ -625,18 +625,26 @@ $n \times n$ 행렬 $A$에 대해서 $AB=BA=I$인 $n \times n$ 행렬 $B$를 $A$
 
 정의에서 알 수 있듯이, 정사각행렬(정방행렬)이 아니면 가역일 수 없음.
 
-\subsubsection*{2) 성질}
-$A$가 가역이면 $A$의 역행렬은 유일함.
-
-\subsubsection*{3) 구하는 방법}
-
 행렬의 역행렬을 구하는 방법은 3절에서 다룸.
+
+\subsubsection*{2) 성질}
+$A$가 가역이면 $A$의 역행렬은 유일함.\\
+
+
+\section*{3. 가역성의 판별}
+\subsubsection*{1) 선형변환의 가역성 판별}
+선형변환이 전단사인지를 확인함(Dimension Theorem, Theorem 2.4, Theorem 2.5). 또는 그 행렬표현이 가역인지를 확인함(Theorem 2.18).
+
+\subsubsection*{2) 행렬의 가역성 판별}
+$n \times n$ 행렬인 경우 랭크가 $n$인지 확인함. 또는 해당하는 선형변환이 가역인지를 확인함(Theorem 2.18).
+
+행렬식이 0이 아닌지 확인함.
 
 
 \newpage
 
 
-\section*{3. 동형(isomorphic)과 동형사상(isomorphism)}
+\section*{4. 동형(isomorphic)과 동형사상(isomorphism)}
 구체적으로는 다르지만 구조적으로는 같은 것을 동형(isomorphic)이라 함.
 
 \subsubsection*{1) 정의\\}
@@ -678,7 +686,7 @@ Theorem 2.19에 의하면, 같은 체 위의 두 벡터공간의 차원이 같�
 \end{tikzpicture}
 
 
-\section*{4. 표준표현(standard representation)}
+\section*{5. 표준표현(standard representation)}
 \subsubsection*{1) 정의\\}
 \begin{DEF}
 체 $F$에서의 $n$차원 벡터공간 $V$의 순서기저를 $\beta$라 하자. $\beta$에 대한 $V$의 표준표현(standard representation)은 아래와 같이 정의된 함수 $\phi_{\beta}:V \rightarrow F^n$임.
@@ -714,7 +722,7 @@ L_{[T]_{\beta}^{\gamma}}\phi_{\beta}=\phi_{\gamma}T
     \includegraphics[width=5cm, height=5cm]{images/2.4.png}\\
 \end{figure}
 
-\section*{5. 관련 정리}
+\section*{6. 관련 정리}
 \subsubsection*{1) 역함수의 선형성}
 \textbf{Theorem 2.17}\, 벡터공간 $V,W$와 가역인 선형변환 $T:V \rightarrow W$에 대해서 역함수 $T^{-1}:V \rightarrow W$ 또한 선형임.
 
@@ -792,7 +800,7 @@ Theorem 2.22에 의하면, 유한차원 벡터공간 $V$의 두 순서기저 $\b
 
 즉, 좌표변환 행렬은 벡터공간의 어떤 벡터에 대해서, 특정 기저로 표현한 좌표벡터를 다른 기저로 표현한 좌표벡터로 만들 수 있는 것.
 
-$Q$는 $\beta^{\prime}$좌표를 $\beta$좌표로 변환한다고 함.
+$Q$는 $\beta^{\prime}$좌표를 $\beta$좌표로 변환함.
 
 이때, $Q^{-1}$은 $\beta$좌표를 $\beta^{\prime}$좌표로 변환함.\\
 
@@ -820,9 +828,11 @@ $[T]_{\alpha}^{\beta}=[I_W]_{\beta^\prime}^{\beta}[T]_{\alpha^{\prime}}^{\beta^{
 $A,B$가 $M_{n \times n}(F)$의 행렬이라 하자. $B=Q^{-1}AQ$인 가역행렬 $Q$가 존재하면 $B$는 $A$와 서로 닮음(similar)임.
 \end{DEF}
 
-즉, 동일한 선형변환에 대해 서로 다른 두 행렬표현은 서로 닮은(similar)임.
+즉, 동일한 선형변환에 대해 서로 다른 두 행렬표현은 서로 닮음(similar)임.
 
 닮음 관계는 동치관계임.
+
+서로 닮은 행렬들에 대해서 모두 같은 값을 갖는 것들이 있음. 즉, invariant인 것들이 있음. invariant에는 랭크(rank), 행렬식(determinant), 대각합(trace) 등이 있음.\footnote{invariant에 속하는 것들은 뒷 장에서 계속해서 등장함.}
 
 
 \newpage
